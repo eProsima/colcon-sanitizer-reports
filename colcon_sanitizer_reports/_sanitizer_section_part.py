@@ -123,6 +123,7 @@ class SanitizerSectionPart:
 
             # Find the line that begins the relevant stack trace.
             for line_i, line in enumerate(lines[line_i:], start=line_i):
+                print(line)
                 match = find_relevant_stack_trace_begin_regex.match(line)
                 if match is not None:
                     break
@@ -131,6 +132,7 @@ class SanitizerSectionPart:
             # doesn't match.
             relevant_stack_trace_lines = []  # type: List[str]
             for line_i, line in enumerate(lines[line_i + 1:], start=line_i + 1):
+                print(line)
                 match = _FIND_STACK_TRACE_LINE_REGEX.match(line)
                 if match is not None:
                     relevant_stack_trace_lines.append(line)
