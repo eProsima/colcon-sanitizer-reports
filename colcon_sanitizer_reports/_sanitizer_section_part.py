@@ -143,9 +143,12 @@ class SanitizerSectionPart:
                     break
 
             # If we gathered any stack trace lines, store the relevant stack trace.
-            if relevant_stack_trace_lines:
-                relevant_stack_traces.append(
-                    SanitizerSectionPartStackTrace(lines=tuple(relevant_stack_trace_lines))
-                )
+            try:
+                if relevant_stack_trace_lines:
+                    relevant_stack_traces.append(
+                        SanitizerSectionPartStackTrace(lines=tuple(relevant_stack_trace_lines))
+                    )
+            except AssertionError:
+                continue
 
         self._relevant_stack_traces = tuple(relevant_stack_traces)
